@@ -1,4 +1,4 @@
-## A Docker-based, Flask Python web-application with an embedded Bokeh application to run a multi-tenant, live-inference machine learning predictions on an acoustic data stream. 
+## A Docker-based, Flask Python web-application with an embedded Bokeh application to run multi-tenant, live-inference machine learning models against an acoustic data stream. 
 The models deployed onto the system predict ship classes on a live acoustic stream with an AIS visualization for correlation and fusion of multiple sources of sensor data.
 
 This code was created in support of the master's thesis located at https://calhoun.nps.edu/handle/10945/68759 
