@@ -1,0 +1,10 @@
+README.md
+setup.py
+vs_data_query/__init__.py
+vs_data_query/helper_functions.py
+vs_data_query/wav_reader.py
+vs_data_query.egg-info/PKG-INFO
+vs_data_query.egg-info/SOURCES.txt
+vs_data_query.egg-info/dependency_links.txt
+vs_data_query.egg-info/not-zip-safe
+vs_data_query.egg-info/top_level.txt

@@ -1,0 +1,74 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('static', filename='mystyle.css')}}">
+{% endblock %}
+
+<!-- FFEC8C-->
+{% block navbar %} 
+
+    <nav class="navbar navbar-custom">
+        <div class="container">
+            
+            <a href="#" class="navbar-left resize"><img src="{{url_for('static', filename='company_logo.png')}}"></a>
+            <div class="navbar navbar-header">
+                
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('index') }}">Acoustic Inference App</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    {% if current_user.is_anonymous %}
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    {% else %} 
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    {% endif %}
+                    <li><a href ="{{ url_for('models') }}"> Live Inference</a></li>
+                    <li><a href ="{{ url_for('metrics') }}">Metrics</a></li>
+                    <li><a href ="{{ url_for('manage_models') }}">Manage Models</a></li>
+                    <li><a href ="{{ url_for('manage_data') }}">Manage Data</a></li>
+                </ul>
+            
+            </div>
+        </div>
+
+    </nav>
+{% endblock navbar %}
+
+
+
+{% block title %} 
+    {% if title %} {{title}} - Live Acoustic Inference App {% else %} Welcome to the Live Acoustic Inference App {% endif %}
+{% endblock title %}
+
+{% block content %}
+
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-info" role="alert">{{ message }}</div>
+        {% endfor %} 
+    {% endif %} 
+    {% endwith %}
+
+    {% block app_content %} {% endblock %}
+
+</div>
+
+{% block footer %}{%- endblock footer %}
+
+
+{% endblock content %} 
+

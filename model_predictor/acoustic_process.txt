@@ -1,0 +1,74 @@
+# Times are return as a list of lists, the first list is the start time, second is the end time
+def wavcrawler_data_process(segment, mode, channels):
+
+    # For a single prediction, don't pass the entire wavcrawler object, just pass the segment
+    # ensure the segment is 30 seconds
+    if mode == 'single':
+        if channels == 1:
+            downsample = scipy_signal.resample(segment[0][0], 120000)
+            audio = tf.convert_to_tensor([downsample], np.float32)
+            audio = tf.reshape(audio, [120000,1])
+        elif channels == 4:
+            temp_data = []
+            for i in range(0,4):
+                data = scipy_signal.resample(segment[0][i], 120000)
+                #np.append(test, data, axis=0)
+                temp_data.append(data)
+            audio = np.array(temp_data)
+            audio = tf.convert_to_tensor(audio, np.float32)
+            audio = tf.reshape(audio, [120000, 4])
+
+    # For a batch, pass the entire wavcrawler object and this will iterate through the segments
+    # Ensure each segment is 30 seconds
+    elif mode == 'batch':
+        audio = []
+        times = []
+        if channels == 1:
+            for slice in segment:
+                # save start time and end time to a list
+                tmp_time = []
+                for time in slice[2]:
+                    timestamp_indicator = 1
+                    for item in time:
+                        if timestamp_indicator==1:
+                            tmp_time.append(item)
+                            timestamp_indicator = 0
+                        elif timestamp_indicator==0:
+                            timestamp_indicator=1
+                times.append(tmp_time)
+                # end saving start and end times
+
+                downsample = scipy_signal.resample(slice[0][0], 120000)
+                audio_slice = tf.convert_to_tensor([downsample], np.float32)
+                audio_slice = tf.reshape(audio_slice, [120000,1])
+                audio_slice = audio_slice.numpy()
+                audio.append(audio_slice)
+        elif channels == 4:
+            for slice in segment:
+                # save start time and end time to a list
+                tmp_time = []
+                for time in slice[2]:
+                    timestamp_indicator = 1
+                    for item in time:
+                        if timestamp_indicator==1:
+                            tmp_time.append(item)
+                            timestamp_indicator = 0
+                        elif timestamp_indicator==0:
+                            timestamp_indicator=1
+                times.append(tmp_time)
+                # end saving start and end times
+
+                temp_data = []
+                for i in range(0,4):
+                    data = scipy_signal.resample(slice[0][i], 120000)
+                    #np.append(test, data, axis=0)
+                    temp_data.append(data)
+                audio_slice = np.array(temp_data)
+                audio_slice = tf.convert_to_tensor(audio_slice, np.float32)
+                audio_slice = tf.reshape(audio_slice, [120000, 4])
+                audio_slice = audio_slice.numpy()
+                audio.append(audio_slice)
+        times = np.array(times)
+        times = times.T
+
+    return audio, times

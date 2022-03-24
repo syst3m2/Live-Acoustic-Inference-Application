@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: sqlite-resources
+Version: 0.2
+Summary: Helper package which wraps the sqlite3 library, providing simple commands for the sqlite3 databases
+Home-page: https://gitlab.nps.edu/vector-sensor-processing/python/sqlite_resources
+Author: Paul Leary
+Author-email: pleary@nps.edu
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN

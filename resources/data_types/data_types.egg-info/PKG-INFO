@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: data-types
+Version: 0.2
+Summary: Helper package which contains custom data types for interacting with VS data
+Home-page: https://gitlab.nps.edu/vector-sensor-processing/python/data_types
+Author: Paul Leary
+Author-email: pleary@nps.edu
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN

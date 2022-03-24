@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: vs-data-query
+Version: 0.5
+Summary: Package which interfaces with the VS data, queries database, and crawls data.
+Home-page: https://gitlab.nps.edu/vector-sensor-processing/python/vs_data_query
+Author: Paul Leary
+Author-email: pleary@nps.edu
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN

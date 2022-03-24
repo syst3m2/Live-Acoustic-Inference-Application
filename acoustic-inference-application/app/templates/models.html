@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-2.3.0.min.js"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.3.0.min.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.3.0.min.js"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+
+    <script>
+        $('.bk').one("DOMSubtreeModified",function(){ 
+            console.log("Hiding loader")
+            $(".loader").delay(15000).hide();
+        })
+
+    </script>
+    {{ script | safe }}
+
+{% endblock %}
+
+{% block app_content %}
+
+<!--This display ais stream raw data <div><p> {{ stream }} </p></div>-->
+
+<div align='center'> 
+    <h3> <b>Live Inference Model Predictions</b></h3> <br><br>
+    <p>All ship classes correspond to a particular set of ship designations 
+        as outlined by the U.S. Coast Guard AIS Encoding Guide and are categorized 
+        in accordance with the research efforts outlined in 
+        <a href=https://torpedo.nrl.navy.mil/tu/ps/doc.html?vol=113&dsn=16607052&ssn=22&iss=C&st=JRNAL> this paper </a><br><br>
+        <b>Class A:</b> Fishing Vessel, Tug, Towing Vessel<br><br>
+        <b>Class B:</b> Pleasure Craft, Sailboat, Pilot<br><br>
+        <b>Class C:</b> Passenger Ship, Cruise Ship <br><br>
+        <b>Class D:</b> Tanker, Container Ship, Military Ship, Bulk Carrier<br><br>
+        <b>Class E:</b> No ship present, background noise<br><br>
+    </p>
+
+</div>
+
+
+<div class="loader"></div>
+
+<div id="content" class="plot">
+    {{acoustic_plot | safe}}
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,8 @@
+setup.py
+sqlite_resources/__init__.py
+sqlite_resources/commands.py
+sqlite_resources.egg-info/PKG-INFO
+sqlite_resources.egg-info/SOURCES.txt
+sqlite_resources.egg-info/dependency_links.txt
+sqlite_resources.egg-info/not-zip-safe
+sqlite_resources.egg-info/top_level.txt

@@ -1,0 +1,17 @@
+{% extends "base_w_footer.html" %}
+
+{% block app_content %}
+
+    <!--<div><p>Welcome to the Naval Postgraduate School Live Acoustic Inference Application.</p></div>-->
+    <div>
+        <a class="btn btn-primary" href="{{ url_for('models') }}" role="button">Live Inference Display</a>
+        <p> Click to view live inference predictions on acoustic stream</p>
+        <a class="btn btn-primary" href="{{ url_for('metrics') }}" role="button">Metrics</a>
+        <p> Click to view performance metrics for currently and previously deployed models</p>
+        <a class="btn btn-primary" href="{{ url_for('manage_models') }}" role="button">Manage Models</a>
+        <p> Click to deploy, stop, or reactivate models for live inference (account required)</p>
+        <a class="btn btn-primary" href="{{ url_for('manage_data') }}" role="button">Manage Data</a>
+        <p> Click to update ship class categorizations for AIS ship designators previously unknown (account required)</p>
+    </div>
+
+{% endblock %}

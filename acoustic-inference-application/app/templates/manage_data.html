@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block scripts %}
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-2.3.0.min.js"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.3.0.min.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.3.0.min.js"
+        crossorigin="anonymous"></script>
+    {{ script | safe }}
+
+{% endblock %}
+
+{% block app_content %}
+
+    <h1>
+        Update Ship Classes
+    </h1>
+
+    <p> 
+        On this page you can select the correct class for 'Uknown' ship designations, or change the class
+        of designations. The ship designations are currently treated as Unknown and discarded in the data.
+        Please select the appropriate class they should be categorized into so future ships
+        of this class can be recorded.<br><br>
+        Please refer to the following research to familiarize yourself with the ship class
+        cateorization convention: <a href=https://torpedo.nrl.navy.mil/tu/ps/doc.html?vol=113&dsn=16607052&ssn=22&iss=C&st=JRNAL>ShipsEar: An Underwater Vessel Noise Database</a>
+    </p>
+
+    <p>
+        Changes made via this form will not reflect in past the True Labels used to evaluate model metrics, only future labels.
+    </p>
+
+
+    <h1>Average Ship Class Sizes</h1>
+
+    {{ class_script|safe }}
+    {{ class_div|safe }}
+
+    <h1>Average Unknown Ship Designation Sizes</h1>
+
+    {{ table_script|safe }}
+    {{ table_div|safe }}
+
+    <h1>Assign Ship Class</h1>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(class_form) }}
+        </div>
+    </div>
+
+    <h1>Average Ship Designation Sizes</h1>
+
+    {{ known_desig_script|safe }}
+    {{ known_desig_div|safe }}
+
+    
+    <h1>Change Ship Class</h1>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(known_class_form) }}
+        </div>
+    </div>
+
+
+    
+
+{% endblock %}

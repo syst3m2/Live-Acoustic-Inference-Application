@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+    <h1>Deploy a Model</h1>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(upload_form) }}
+        </div>
+    </div>
+
+    <h1>Stop a Model</h1>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(delete_form) }}
+        </div>
+
+    </div>
+
+    <h1>Reactivate a Model</h1>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(activate_form) }}
+        </div>
+    </div>
+
+{% endblock %}
+
+<!--
+    <form action="" method="post" id="upload-form-submit" name="upload-form-submit" enctype="multipart/form-data" novalidate>
+        {{ upload_form.hidden_tag() }}
+        <p>
+            {{ upload_form.modelfile.label }}<br>
+            {{ upload_form.modelfile }}<br>
+            {% for error in upload_form.modelfile.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ upload_form.paramsfile.label }}<br>
+            {{ upload_form.paramsfile }}<br>
+            {% for error in upload_form.paramsfile.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ upload_form.model_name.label }}<br>
+            {{ upload_form.model_name }}<br>
+            {% for error in upload_form.model_name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ upload_form.model_type.label }}<br>
+            {{ upload_form.model_type }}<br>
+            {% for error in upload_form.model_type.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ upload_form.channels.label }}<br>
+            {{ upload_form.channels }}<br>
+            {% for error in upload_form.channels.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ upload_form.model_input.label }}<br>
+            {{ upload_form.model_input }}<br>
+            {% for error in upload_form.model_input.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ upload_form.model_choice.label }}<br>
+            {{ upload_form.model_choice }}<br>
+            {% for error in upload_form.model_choice.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ upload_form.prediction_classes.label }}<br>
+            {{ upload_form.prediction_classes }}<br>
+            {% for error in upload_form.prediction_classes.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ upload_form.training_accuracy_score.label }}<br>
+            {{ upload_form.training_accuracy_score }}<br>
+            {% for error in upload_form.training_accuracy_score.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+
+        <p>{{ upload_form.submit_upload() }}</p>
+
+    </form>
+
+    <h1>Stop a Model</h1>
+    <form action="" id="upload-form-delete" name="upload-form-delete" method="post" novalidate>
+        {{ delete_form.hidden_tag() }}
+        <p>
+            {{ delete_form.delete_field.label }}<br>
+            {{ delete_form.delete_field }}<br>
+            {% for error in delete_form.delete_field.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ delete_form.submit_delete() }}</p>
+    </form>
+
+    <h1>Reactivate a Model</h1>
+    <form action="" id="upload-form-activate" name="upload-form-activate" method="post" novalidate>
+        {{ activate_form.hidden_tag() }}
+        <p>
+            {{ activate_form.activate_field.label }}<br>
+            {{ activate_form.activate_field }}<br>
+            {% for error in activate_form.activate_field.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ activate_form.submit_activate() }}</p>
+    </form>
+
+
+
+
+-->

@@ -1,0 +1,131 @@
+version: '3.8'
+
+services:
+
+  app:
+    build:
+        context: .
+        dockerfile: acoustic-inference-application/Dockerfile.app
+    volumes:
+        - /home/nicholas.villemez@ern.nps.edu/inference_application/dev_acoustic_app/acoustic-inference-application:/home/acoustic_app
+        - /home/nicholas.villemez@ern.nps.edu/inference_application/models/dev_models:/home/models
+    entrypoint: ["/home/acoustic_app/boot.sh"]
+    command: prod
+    ports:
+        - 80:5000
+        - 5006-5010:5006-5010
+    environment:
+        - FLASK_APP=/home/acoustic_app/acoustic-inference-app.py
+        - FLASK_ENV=development
+        - APP_SETTINGS=config.Config
+        - DATABASE_URL=postgresql://postgres:postgres@app-db:5432/inference_db
+        - PORT=5000
+        - DOCKER_CLIENT_TIMEOUT=120
+        - COMPOSE_HTTP_TIMEOUT=120
+        - INFERENCE_VIZ=http://visualization:5011/acoustic_plot
+        - METRICS_VIZ=http://visualization:5011/metrics_plot
+        - MODEL_FOLDER=/home/models
+        - SECRET_KEY=you-will-never-guess
+    depends_on:
+        - visualization
+        - app-db
+    networks:
+        - acoustic_net
+
+  visualization:
+    build:
+        context: .
+        dockerfile: visualization/Dockerfile.viz
+    volumes:
+        - /home/nicholas.villemez@ern.nps.edu/inference_application/dev_acoustic_app/visualization:/home/visualization
+        - /mnt/mbari:/group/mbari
+    entrypoint: ["/home/visualization/vizboot.sh"]
+    ports:
+        - 5011:5011
+        - 3306:3306
+    environment:
+        - BOKEH_PY_LOG_LEVEL=debug
+        - ACOUSTIC_DATABASE_URL=sqlite:////group/mbari/upload/MARSInfo/master_index.db
+        - DATABASE_URL=postgresql://postgres:postgres@app-db:5432/inference_db #sqlite:////home/db/app.db
+    depends_on: 
+        - app-db
+    networks:
+        - acoustic_net
+
+  app-db:
+    build:
+        context: ./db
+        dockerfile: Dockerfile.db
+    ports:
+        - 5432:5432
+    volumes:
+        - /home/nicholas.villemez@ern.nps.edu/inference_application/db_backup/dev_db_backup:/home/backups
+    environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+    networks:
+        - acoustic_net
+
+  ais-stream:
+    build:
+        context: ./ais_streamer
+        dockerfile: Dockerfile.ais
+    ports:
+        - 5555:5555
+    environment:
+        - SEAVISION_API_KEY=<ENTER SEAVISION API KEY HERE>
+        - DATABASE_URL=postgresql://postgres:postgres@app-db:5432/inference_db
+    volumes:
+        - /home/nicholas.villemez@ern.nps.edu/inference_application/dev_acoustic_app/ais_streamer:/home/ais_stream 
+        - /home/nicholas.villemez@ern.nps.edu/inference_application/tracking/dev_tracking:/home/tracking
+    entrypoint: ["/home/ais_stream/aisboot.sh"] 
+    command: dev-cont
+    depends_on: 
+        - app-db
+    networks:
+        - acoustic_net 
+
+  predict-stream:
+    build:
+        context: .
+        dockerfile: model_predictor/Dockerfile.pred
+    ports:
+        - 55576:55576
+    environment:
+        - ACOUSTIC_DATABASE_URL=sqlite:////group/mbari/upload/MARSInfo/master_index.db
+        - MODEL_FOLDER=/home/models
+        - DATABASE_URL=postgresql://postgres:postgres@app-db:5432/inference_db
+    volumes:
+        - /home/nicholas.villemez@ern.nps.edu/inference_application/dev_acoustic_app/model_predictor:/home/pred_stream
+        - /home/nicholas.villemez@ern.nps.edu/inference_application/models/dev_models:/home/models
+        - /mnt/mbari:/group/mbari
+        - /home/nicholas.villemez@ern.nps.edu/inference_application/tracking/dev_tracking:/home/tracking
+        - /home/nicholas.villemez@ern.nps.edu/inference_application/db:/home/db
+    entrypoint: ["/home/pred_stream/infboot.sh"] 
+    #command: dev-first
+    depends_on:
+        - app-db
+    networks:
+        - acoustic_net
+        
+  true-label:
+    build:
+        context: ./true_labeler
+        dockerfile: Dockerfile.label
+    ports:
+        - 55520:55520
+    environment:
+        - DATABASE_URL=postgresql://postgres:postgres@app-db:5432/inference_db
+    volumes:
+        - /home/nicholas.villemez@ern.nps.edu/inference_application/dev_acoustic_app/true_labeler:/home/labeler
+        - /home/nicholas.villemez@ern.nps.edu/inference_application/tracking/dev_tracking:/home/tracking
+    entrypoint: ["/home/labeler/label.sh"] 
+    #command: dev-first
+    depends_on:
+        - app-db
+    networks:
+        - acoustic_net
+
+
+networks:
+    acoustic_net:

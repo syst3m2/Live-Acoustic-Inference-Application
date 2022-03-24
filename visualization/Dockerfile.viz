@@ -1,0 +1,38 @@
+# pull official base image
+FROM python:3.6-slim-buster
+
+COPY visualization/requirements_viz.txt .
+
+# install system dependencies
+RUN apt-get update \
+  && apt-get -y install netcat gcc \
+  && apt-get clean
+
+# add and install requirements
+#COPY ./requirements.txt .
+RUN pip install -r requirements_viz.txt
+
+RUN adduser -disabled-password visualization
+
+# set working directory
+WORKDIR /home/visualization
+
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+#COPY visualization/ .
+
+
+COPY resources/ ../resources
+
+COPY acoustic-inference-application/app.db ../db/app.db
+
+RUN pip install -e ../resources/vs_db_maintainer/
+RUN pip install -e ../resources/vs_data_query/
+RUN pip install -e ../resources/sqlite_resources/
+RUN pip install -e ../resources/data_types/
+
+RUN apt-get install net-tools
+
+#RUN chmod +x /home/visualization/vizboot.sh

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+
+    <script>
+        $('#accuracy_scores').one("DOMSubtreeModified",function(){ 
+            console.log("Hiding loader")
+            $(".loader").delay(15000).hide();
+        })
+
+    </script>
+    {{ script | safe }}
+
+{% endblock %}
+
+{% block app_content %}
+
+
+<div class="loader"></div>
+
+<!--This display ais stream raw data <div><p> {{ stream }} </p></div>-->
+
+<div id="accuracy_scores", align='center'>
+    {{accuracy_scores | safe}}
+</div>
+
+
+{% endblock %}

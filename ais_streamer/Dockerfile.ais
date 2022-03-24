@@ -1,0 +1,23 @@
+# pull official base image
+FROM python:3.6-slim-buster
+
+COPY requirements_ais.txt .
+
+# install system dependencies
+RUN apt-get update \
+  && apt-get -y install netcat gcc \
+  && apt-get clean
+
+RUN pip install -r requirements_ais.txt
+
+RUN adduser -disabled-password ais_stream
+
+# set working directory
+WORKDIR /home/ais_stream
+
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# For production, copy directory instead of mounting volume
+#COPY . .

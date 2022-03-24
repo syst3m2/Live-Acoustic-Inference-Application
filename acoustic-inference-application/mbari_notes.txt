@@ -1,0 +1,11 @@
+grab data needed from hamming
+
+get_latest.bash is command line tool to see if anything is wrong, check latest file in database is correct
+
+pip install git+https://gitlab.nps.edu/vector-sensor-processing/python/vs_db_maintainer.git
+fresh_db creates empty database in specified folder (master_index.db)
+
+update-db makes the database
+
+pip install git+https://gitlab.nps.edu/vector-sensor-processing/python/vs_data_query.git
+to make simple scroller work

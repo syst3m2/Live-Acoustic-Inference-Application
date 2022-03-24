@@ -1,0 +1,107 @@
+<script type="text/javascript">
+        function preloader(){
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("content").style.display = "block";
+        }//preloader
+        window.onload = preloader;
+    </script>
+
+
+<div id="loading"><p>Loading</p></div>
+
+
+div#content {
+    display: none;
+    }
+
+
+This kinda works
+
+<script>
+        $(window).load(function() {
+        $('#loading').hide();
+        });
+    </script>
+
+<div id="loading">
+    <img id="loading-image" src="{{ url_for('static', filename='loading-spinner.gif') }}" alt="Loading..." />
+</div>
+
+
+var loading = getElementById("loading");
+document.getElementById("loading").style.display="hidden";
+
+$("#content.bk.bk").removeClass("active");
+
+$('#content').on('DOMSubtreeModified', '.bk', function(){
+  document.getElementById("loading").style.display="hidden";
+});
+
+<script>
+        $(window).load(function() {
+        $('#loading').hide();
+        });
+    </script>
+
+
+$('#content').on('DOMSubtreeModified', '.bk', function(){
+            document.getElementById("loading").style.display="hidden";
+        });
+
+
+
+
+
+<div class="spinner-border" id="loading"></div>
+
+
+
+
+Latest that works
+<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+    
+    <script>
+        $('#content').one("DOMSubtreeModified",function(){ 
+            $("#loading-image").delay(15000).hide();
+        })
+
+    </script>
+
+
+<div id="loading">
+    <img id="loading-image" src="{{ url_for('static', filename='loading-spinner.gif') }}" alt="Loading..." />
+</div>
+
+
+position: absolute;
+    top: 100px;
+    left: 240px;
+    z-index: 100;
+
+<div id="loading">
+</div>
+
+<img id="loading-image" src="{{ url_for('static', filename='loading-spinner.gif') }}" alt="Loading..." />
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin-left: auto;
+    margin-right: auto;
+}
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loading-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}

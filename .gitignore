@@ -1,0 +1,8 @@
+models/
+database_backup/
+**/__pycache__/
+__pycache__/
+**/core
+**/*.json
+**/*.ipynb
+acoustic-inference-application/migrations/

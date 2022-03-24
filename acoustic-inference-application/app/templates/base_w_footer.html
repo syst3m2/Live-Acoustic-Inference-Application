@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block footer %}
+
+    <footer class="mt-auto">
+        <nav class="navbar navbar-custom-footer">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ url_for('index') }}">Home</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                    <ul class="nav navbar-nav">
+                        <li><a href="mailto:nicholas.villemez@nps.edu">Contact LT Nick Villemez (GSOIS CSO Program Student)</a></li>
+                        <li><a href="mailto:marko.orescanin@nps.edu">Contact Marko Orescanin (Thesis Advisor)</a></li>
+                        <li><a href="mailto:paul.leary@nps.edu">Contact Paul Leary (Thesis Co-Advisor)</a></li>
+                    </ul>
+
+                    <span class="navbar-text">
+                        Description: This Naval Postgraduate School thesis aims to help support
+                        machine learning research on passive acoustic signal classification by providing a platform for continuous
+                        model performance evaluation to correct for data drift, applying active learning techniques,
+                        and to support adversarial machine learning research.
+                    </span>
+                    
+                </div>
+
+            </div>
+        </nav>
+    </footer>
+{%- endblock footer %}
