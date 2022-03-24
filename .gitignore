@@ -5,4 +5,5 @@ __pycache__/
 **/core
 **/*.json
 **/*.ipynb
+**/*.csv
 acoustic-inference-application/migrations/

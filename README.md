@@ -1,32 +1,32 @@
-##A Docker-based, Flask Python web-application with an embedded Bokeh application to run a multi-tenant, live-inference machine learning predictions on an acoustic data stream. 
+## A Docker-based, Flask Python web-application with an embedded Bokeh application to run a multi-tenant, live-inference machine learning predictions on an acoustic data stream. 
 The models deployed onto the system predict ship classes on a live acoustic stream with an AIS visualization for correlation and fusion of multiple sources of sensor data.
 
 This code was created in support of the master's thesis located at https://calhoun.nps.edu/handle/10945/68759 
 
 
-##Home Page:
+## Home Page:
 The home page provides access to the various modules present in the web application.
 ![Home Page](/images/app_home_page.png "Home Page")
 
-##MVisualization Module:
+## Visualization Module:
 The visualization module provides access to the spectrogram, model uncertainties, AIS picture, and predicted ship classes.
 ![Visualization Module](/images/user_interface_live_inference.png "Visualization Module")
 
-##Metrics Module:
+## Metrics Module:
 The metrics module provides access to model performance over time.
 ![Metrics Module](/images/user_interface_metrics.png "Metrics Module")
 
-##Data Management Module:
+## Data Management Module:
 The data management module provides functionality to edit and update ship classes to deal with concept drift in the dataset. 
 ![Data Management Module](/images/user_interface_manage_data.png "Data Management Module")
 
-##Model Management Module:
+## Model Management Module:
 The model management module allows users to deploy, deactivate, and reactive machine learning models to do live-inference.
 ![Model Management Module](/images/user_interface_manage_models.png "Model Management Module")
 
 
 
-##Getting Started:
+## Getting Started:
 Note: These instructions and the application will not function for any user, because it requires access to data sources that are not publicly accessible. Please use the below as a general description of the docker container purposes and methods used for the system architecture.
 
 
